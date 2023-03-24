@@ -106,3 +106,7 @@ class ZingMp3Async(ZingMp3):
     async def search(self, search):
         data = await requestZing("/api/v2/search/multi", {"q": search}, 1)
         return Search(data["data"], client=self)
+    
+    async def getHub(self):
+        data = requestZing("/api/v2/page/get/hub-home", haveParam=1)
+        return data['data']['genre']
