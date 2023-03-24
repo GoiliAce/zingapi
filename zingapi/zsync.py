@@ -37,7 +37,9 @@ def requestZing(path, qs={}, haveParam=0):
     url = "https://zingmp3.vn" + path
     with requests.Session() as s:
         with s.get(url, params=qs, cookies=get_ck(s)) as r:
+            print(s)
             data = r.json()
+            print(r.url)
             if data['err'] != 0:
                 raise ZingMp3Error(data)
             return data
@@ -77,5 +79,5 @@ class ZingMp3:
     
     def getHub(self):
         data = requestZing("/api/v2/page/get/hub-home", haveParam=1)
-        return data['data']
+        return data['data']['genre']
 
